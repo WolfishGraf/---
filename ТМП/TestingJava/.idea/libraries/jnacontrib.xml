@@ -1,0 +1,10 @@
+<component name="libraryTable">
+  <library name="jnacontrib">
+    <CLASSES>
+      <root url="file://$PROJECT_DIR$/../jna-master/jna-master/dist/jnacontrib" />
+    </CLASSES>
+    <JAVADOC />
+    <SOURCES />
+    <jarDirectory url="file://$PROJECT_DIR$/../jna-master/jna-master/dist/jnacontrib" recursive="false" />
+  </library>
+</component>
