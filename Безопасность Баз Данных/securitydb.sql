@@ -31,10 +31,9 @@ SELECT
 CONCAT (transpgroup.id_tg,' : ', transpgroup.name,' - ', transpgroup.note) AS "Группы транспортных средств"
 FROM "OAS_Manager".transpgroup;
 
---7? (преобразование даты сделать)
-
+--7
 SELECT 
-CONCAT (mechanic.sname_initials,' , дата рождения ', mechanic.born) AS "Лучшие механики предприятия"
+CONCAT (mechanic.sname_initials,' , дата рождения ', TO_CHAR(mechanic.born, 'dd.mm.yyyy')) AS "Лучшие механики предприятия"
 FROM "OAS_Manager".mechanic
 LIMIT 10;
 
@@ -51,19 +50,25 @@ FROM "OAS_Manager".vehicle;
 select sum(vehicle.nalog)
 FROM "OAS_Manager".vehicle;
 
+--9
 
+select sum(cast (vehicle.cost as decimal(12,2)))
+FROM "OAS_Manager".vehicle;
 
+--10
+SELECT mechanic.sname_initials, TO_CHAR(mechanic.born, 'dd.mm.yyyy'), DATE_PART('year', AGE(mechanic.born)) 
+from "OAS_Manager".mechanic;
 
+--11
+select
+concat (vehicle.gnz, ' - ', cast ((vehicle.cost/ vehicle.run) as decimal(12,2)) ) as "Отношение стоимости к пробегу (руб\км)"
+from "OAS_Manager".vehicle;
 
+--12
+select maintenance.gnz, to_char(maintenance.date_work, 'dd.mm.yyyy') as "date",to_char(maintenance.date_work, 'hh:ii:ss') as "time"
+from "OAS_Manager".maintenance;
 
-
-
-
-
-
-
-
-
+--13
 
 
 
