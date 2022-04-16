@@ -68,11 +68,26 @@ from "OAS_Manager".vehicle;
 select maintenance.gnz, to_char(maintenance.date_work, 'dd.mm.yyyy') as "date",to_char(maintenance.date_work, 'hh:ii:ss') as "time"
 from "OAS_Manager".maintenance;
 
---13
+--13?
 
+--14
+select 
+concat(vehicle.gnz, ' : ', to_char(vehicle.date_made, 'DAY'), ' : ', extract(DOY FROM vehicle.date_made)) 
+as "День недели и день года выпуска"
+from "OAS_Manager".vehicle;
 
+--15
+select factory.factory_name, factory.post_addr, factory.phone
+from "OAS_Manager".factory
+where (factory.post_addr = factory.legal_addr) and (factory.factory_name like '%а%');
 
-
+--16
+/*16.	Составить список механиков, имеющих трудовой стаж (столбец certif_date) более 10 лет. 
+Выдать фамилии и инициалы механиков, даты выдачи сер-тификатов и приема на работу, трудовой стаж (полных лет), 
+отсортировать список по возрастанию трудового стажа. */
+SELECT mechanic.sname_initials,mechanic.certif_date,mechanic.work_in_date,DATE_PART('year', AGE(mechanic.certif_date))
+from "OAS_Manager".mechanic
+where DATE_PART('year', AGE(mechanic.certif_date))>10; 
 
 
 
