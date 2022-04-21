@@ -82,14 +82,22 @@ from "OAS_Manager".factory
 where (factory.post_addr = factory.legal_addr) and (factory.factory_name like '%а%');
 
 --16
-/*16.	Составить список механиков, имеющих трудовой стаж (столбец certif_date) более 10 лет. 
-Выдать фамилии и инициалы механиков, даты выдачи сер-тификатов и приема на работу, трудовой стаж (полных лет), 
-отсортировать список по возрастанию трудового стажа. */
 SELECT mechanic.sname_initials,mechanic.certif_date,mechanic.work_in_date,DATE_PART('year', AGE(mechanic.certif_date))
 from "OAS_Manager".mechanic
 where DATE_PART('year', AGE(mechanic.certif_date))>10; 
 
+--17
+select vehicle.gnz, vehicle.num$reg_certif,vehicle.ser$reg_certif,vehicle.date$reg_certif
+from "OAS_Manager".vehicle
+where  not vehicle.gnz  like '%57%';
 
+--18
+select vehicle.gnz,cast((vehicle.cost/100 * 18) as decimal(12,2))as "NDS", vehicle.date_use
+from "OAS_Manager".vehicle
+where (vehicle.cost/100 * 18)>500000;
+
+--19
+--20
 
 
 
