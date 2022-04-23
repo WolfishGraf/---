@@ -11,10 +11,13 @@ SELECT vehicle.gnz,
 CONCAT (vehicle.ser$Reg_certif, vehicle.num$Reg_certif, vehicle.date$Reg_certif) AS "Свидетельство"
 FROM "OAS_Manager".vehicle;
 
---4?
-SELECT maintenance.gnz
+--4(пока выдаёт 142, нужно 159)
+SELECT DISTINCT maintenance.gnz,lower(maintenance.tech_cond_resume)
 FROM "OAS_Manager".maintenance
-WHERE maintenance.tech_cond_resume = 'Годен к эксплуатации';
+WHERE (maintenance.tech_cond_resume like '%годен%') or (maintenance.tech_cond_resume like '%выполнено%') or 
+(maintenance.tech_cond_resume like '%проведено%') or (maintenance.tech_cond_resume like '%подготовлен%') or
+(maintenance.tech_cond_resume like '%проведены%') or (maintenance.tech_cond_resume like '%выполнена%') or
+(maintenance.tech_cond_resume like '%выполнены%');
 
 SELECT *
 FROM "OAS_Manager".maintenance;
@@ -97,18 +100,26 @@ from "OAS_Manager".vehicle
 where (vehicle.cost/100 * 18)>500000;
 
 --19
+select maintenance.gnz, maintenance.date_work, to_char(maintenance.date_work, 'day') as "День недели", maintenance.tech_cond_resume
+from "OAS_Manager".maintenance
+where (to_char(maintenance.date_work, 'day') like '%sunday%') or (to_char(maintenance.date_work, 'day') like '%saturday%');
+
 --20
+select maintenance.gnz, maintenance.date_work, to_char(maintenance.date_work, 'day') as "День недели", maintenance.tech_cond_resume
+from "OAS_Manager".maintenance
+where (maintenance.tech_cond_resume is null) and 
+((to_char(maintenance.date_work, 'day') like '%sunday%') or (to_char(maintenance.date_work, 'day') like '%saturday%'));
 
+--21
+select distinct model.model_name, model.idmo
+from "OAS_Manager".vehicle, "OAS_Manager".model
+where (vehicle.idmo = model.idmo) and (model.model_name like '%А%') and (LENGTH(model.model_name) = 8);
 
-
-
-
-
-
-
-
-
-
+--22
+--23
+--24
+--25
+--26
 
 
 
