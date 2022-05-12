@@ -1,2 +1,2 @@
-# Homework-from-university
-# Здесь содрежатся домашки по университету :)
+﻿# Homework-from-university
+# Здесь содержатся домашки по университету :)
